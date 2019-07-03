@@ -316,6 +316,7 @@ Route::group(['prefix' => 'trangchu'], function () {
         Route::get('/', 'ShoppingCartController@thanhtoan')->name('list.thanhtoan.cart');
         Route::post('/sendemail', 'ShoppingCartController@sendemail')->name('senemail.thanhtoan.cart');
     });
+    route::get('tets','ShoopingCartController@abc');
 });
 
 
