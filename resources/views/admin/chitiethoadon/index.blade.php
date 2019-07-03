@@ -58,7 +58,6 @@
                                 <th class="sorting col-md-2">Số lượng</th>
                                 <th class="sorting col-md-2">Đơn giá</th>
                                 <th class="sorting col-md-2">Thành tiền</th>
-
                             </thead>
                             <tbody>
                             @foreach ($customers as $item)
