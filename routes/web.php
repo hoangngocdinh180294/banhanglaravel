@@ -20,10 +20,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-/**--------------------------------------------------------------------------------
- * TODO: route admin
- * --------------------------------------------------------------------------------
- */
+//TODO: Route Admin
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [
@@ -271,10 +269,8 @@ Route::group(['middleware' => ['auth']], function () {
         ]);
     });
 });
-/**------------------------------------------------------------------------------------------------------
- * TODO::route trang chủ
- * ------------------------------------------------------------------------------------------------------
- */
+
+//TODO: Trang chủ
 
 Route::group(['prefix' => 'trangchu'], function () {
     Route::get('/index', [
