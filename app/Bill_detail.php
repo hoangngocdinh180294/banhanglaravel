@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Bill_detail extends Model
 {
     protected $fillable = [
-        'quantily', 'price'
+        'quantily', 'price',
     ];
-    
+
     public function bill()
     {
         return $this->belongsTo(Bill::class);
