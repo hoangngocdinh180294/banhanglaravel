@@ -27,7 +27,7 @@ class BillController extends Controller
                 'options' => 'required',
             ],
             [
-                'options.required' => 'Bạn vui lòng nhập trạng thái của đơn hàng'
+                    'options.required' => 'Bạn vui lòng nhập trạng thái của đơn hàng'
             ]
         );
         Bill::find($id)->update([

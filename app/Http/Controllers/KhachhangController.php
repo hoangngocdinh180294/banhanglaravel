@@ -18,7 +18,7 @@ class KhachhangController extends Controller
     {
         try {
             DB::beginTransaction();
-            $khachhang = Customer::find($id);
+            $khachhang =  Customer::find($id);
             $khachhang->delete();
             $khachhang->bills()->delete();
             DB::commit();
