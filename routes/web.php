@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 /**--------------------------------------------------------------------------------
- * Trang admin
+ * TODO: route admin
  * --------------------------------------------------------------------------------
  */
 Route::group(['middleware' => ['auth']], function () {
@@ -272,9 +272,10 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 /**------------------------------------------------------------------------------------------------------
- * Trang chủ
+ * TODO::route trang chủ
  * ------------------------------------------------------------------------------------------------------
  */
+
 Route::group(['prefix' => 'trangchu'], function () {
     Route::get('/index', [
         'as' => 'index',
@@ -317,6 +318,3 @@ Route::group(['prefix' => 'trangchu'], function () {
         Route::post('/sendemail', 'ShoppingCartController@sendemail')->name('senemail.thanhtoan.cart');
     });
 });
-
-
-
