@@ -80,6 +80,7 @@ class ShoppingCartController extends Controller
 
         try {
             DB::beginTransaction();
+            //TODO:Cach 2
             // save
             //$customer = new Customer;
             //$customer->name = $request->name;
