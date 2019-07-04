@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Customer;
 use Illuminate\Http\Request;
 use DB;
@@ -10,8 +11,8 @@ class KhachhangController extends Controller
 {
     public function index()
     {
-        $khachhang =Customer::all();
-        return view('admin.khachhang.index',compact('khachhang'));
+        $khachhang = Customer::all();
+        return view('admin.khachhang.index', compact('khachhang'));
     }
     public function delete($id)
     {
@@ -21,9 +22,9 @@ class KhachhangController extends Controller
             $khachhang->delete();
             $khachhang->bills()->delete();
             DB::commit();
-            return redirect()->route('khachhang.index')->with('thongbao','Bạn đã xóa khách hàng thành công');
+            return redirect()->route('khachhang.index')->with('thongbao', 'Bạn đã xóa khách hàng thành công');
         } catch (\Throwable $th) {
-            Log::error('Loi:'.$th->getMessage().$th->getLine());
+            Log::error('Loi:' . $th->getMessage() . $th->getLine());
             DB::rollback();
         }
     }
