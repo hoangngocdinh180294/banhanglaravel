@@ -312,5 +312,6 @@ Route::group(['prefix' => 'trangchu'], function () {
     Route::group(['prefix' => 'thanhtoan'], function () {
         Route::get('/', 'ShoppingCartController@thanhtoan')->name('list.thanhtoan.cart');
         Route::post('/sendemail', 'ShoppingCartController@sendemail')->name('senemail.thanhtoan.cart');
+        
     });
 });
