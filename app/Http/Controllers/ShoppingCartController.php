@@ -143,6 +143,7 @@ class ShoppingCartController extends Controller
                 'email' => $request->email,
                 'diachi' => $request->diachi,
                 'phone' => $request->phone,
+                
             ];
             $data['cart'] = Cart::content();
             $data['total'] = Cart::subtotal();
