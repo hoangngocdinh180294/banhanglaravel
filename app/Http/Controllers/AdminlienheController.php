@@ -17,6 +17,7 @@ class AdminlienheController extends Controller
 
     public function delete($id)
     {
+
         $lienhe = Lienhe::find($id);
         $lienhe->delete();
         return back()->with('thongbao', 'Bạn đã xóa liên hệ thành công');
