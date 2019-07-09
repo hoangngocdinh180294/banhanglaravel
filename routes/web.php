@@ -309,6 +309,7 @@ Route::group(['prefix' => 'trangchu'], function () {
         Route::post('/update/{rowId}', 'ShoppingCartController@updateshoppingcart')->name('update.shopping.cart');
         Route::get('/delete/{rowId}', 'ShoppingCartController@delete')->name('delete.shopping.cart');
     });
+
     Route::group(['prefix' => 'thanhtoan'], function () {
         Route::get('/', 'ShoppingCartController@thanhtoan')->name('list.thanhtoan.cart');
         Route::post('/sendemail', 'ShoppingCartController@sendemail')->name('senemail.thanhtoan.cart');
