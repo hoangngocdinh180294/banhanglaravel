@@ -1,12 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gioithieu extends Model
+class Slide extends Model
 {
+    
     protected $fillable = [
-        'name', 'title','image'
+        'link', 'image'
     ];
 }

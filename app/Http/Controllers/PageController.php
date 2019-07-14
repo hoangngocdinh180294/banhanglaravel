@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Slide;
-use App\Product;
-use App\Typeproduct;
+use App\Models\Slide;
+use App\Models\Product;
+use App\Models\Typeproduct;
 use Illuminate\Http\Request;
-use App\Gioithieu;
+use App\Models\Gioithieu;
 
 class PageController extends Controller
 {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Slide;
+use App\Models\Slide;
 use DB;
 use Illuminate\Support\Facades\Log;
 

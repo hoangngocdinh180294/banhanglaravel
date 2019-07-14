@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
-use App\Customer;
-use App\Bill_detail;
+use App\Models\Product;
+use App\Models\Customer;
+use App\Models\Bill_detail;
 use Cart;
 use Mail;
 use DB;

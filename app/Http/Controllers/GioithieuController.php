@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Gioithieu;
+use App\Models\Gioithieu;
 
 
 use Illuminate\Http\Request;

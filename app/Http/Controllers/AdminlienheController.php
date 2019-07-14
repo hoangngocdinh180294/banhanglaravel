@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Lienhe;
+use App\Models\Lienhe;
 
 use Illuminate\Http\Request;
 

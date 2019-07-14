@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Typeproduct;
+use App\Models\Typeproduct;
 use DB;
 use Illuminate\Support\Facades\Log;
-use App\Product;
+use App\Http\Requests\TypeproductRequest;
 
 class TypeproductController extends Controller
 {
@@ -24,21 +24,8 @@ class TypeproductController extends Controller
         return view('admin.loaisanpham.add');
     }
 
-    public function store(Request $request)
+    public function store(TypeproductRequest $request)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'description' => 'required',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
-            ],
-            [
-                'name.required' => 'Bạn vui lòng nhập tên loại sản phẩm',
-                'description.required' => 'Bạn vui lòng nhập mô tả',
-                'image.required' => 'Bạn vui lòng nhập ảnh',
-                'image.image' => 'Đây không phải là ảnh',
-                'image.mimes' => 'Đuôi ảnh này không hợp lệ',
-            ]);
         try {
             DB::beginTransaction();
             $data=$request->all();
@@ -71,23 +58,9 @@ class TypeproductController extends Controller
          return view('admin.loaisanpham.edit', compact('typeproduct'));
     }
 
-    public function update(Request $request, $id)
+    public function update(TypeproductRequest $request, $id)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'description' => 'required',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
-            ],
-            [
-                'name.required' => 'Bạn vui lòng nhập tên loại sản phẩm',
-                'description.required' => 'Bạn vui lòng nhập mô tả',
-                'image.required' => 'Bạn vui lòng nhập ảnh',
-                'image.image' => 'Đây không phải là ảnh',
-                'image.mimes' => 'Đuôi ảnh này không hợp lệ',
-            ]);
         try {
-
             DB::beginTransaction();
             $typeproduct = Typeproduct::find($id);
             $data=$request->all();

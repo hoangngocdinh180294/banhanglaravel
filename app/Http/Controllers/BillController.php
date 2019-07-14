@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Bill;
+use App\Models\Bill;
 use DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;

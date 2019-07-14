@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\ViewComposers;
 use Illuminate\View\View;
-use App\Product;
-use App\Typeproduct;
+use App\Models\Product;
+use App\Models\Typeproduct;
 
 
 

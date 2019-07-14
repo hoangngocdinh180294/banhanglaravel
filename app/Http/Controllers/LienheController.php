@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Lienhe;
+use App\Models\Lienhe;
 use Carbon\Carbon;
 use Mail;
 
