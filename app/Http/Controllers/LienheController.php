@@ -49,9 +49,5 @@ class LienheController extends Controller
         Lienhe::insert($data);
         return redirect()->back()->with('thongbao','Quý khách đã gửi Email thành công. Chúng tôi sẽ phản hồi lại quý khách trong thời gian gần nhất');
     }
-    public function abc($id){
 
-
-
-    }
 }
