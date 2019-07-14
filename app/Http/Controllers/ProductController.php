@@ -17,6 +17,7 @@ class ProductController extends Controller
         if ($product){
             return view('admin.sanpham.index', compact('product'));
         }
+        
             echo "<div class='alert alert-success'>Không có dữ liệu</div>";
      }
 
