@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Typeproduct;
@@ -33,15 +32,7 @@ class ProductController extends Controller
 //        $product->promotion_price = $request->promotion_price;
 //        $product->unit = $request->unit;
 //        $product->typeproduct_id = $request->typeproduct_id;
-        $product=Product::create([
-            'name'=>$request->name,
-            'description' => $request->description,
-            'unit_price' => $request->unit_price,
-            'promotion_price' => $request->promotion_price,
-            'unit' => $request->unit,
-            'typeproduct_id' => $request->typeproduct_id,
-            'image'=>$request->image,
-        ]);
+        $product=Product::create($request->all());
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 
@@ -74,15 +65,7 @@ class ProductController extends Controller
          try {
             DB::beginTransaction();
             $product = Product::find($id);
-             $product->update([
-                 'name'=>$request->name,
-                 'description' => $request->description,
-                 'unit_price' => $request->unit_price,
-                 'promotion_price' => $request->promotion_price,
-                 'unit' => $request->unit,
-                 'typeproduct_id' => $request->typeproduct_id,
-                 'image'=>$request->image,
-             ]);
+             $product->update($request->all());
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
