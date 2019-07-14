@@ -25,14 +25,14 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-       // $product = new Product();
+        // $product = new Product();
 //        $product->name = $request->name;
 //        $product->description = $request->description;
 //        $product->unit_price = $request->unit_price;
 //        $product->promotion_price = $request->promotion_price;
 //        $product->unit = $request->unit;
 //        $product->typeproduct_id = $request->typeproduct_id;
-        $product=Product::create($request->all());
+        $product = Product::create($request->all());
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 
@@ -62,10 +62,10 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, $id)
     {
-         try {
+        try {
             DB::beginTransaction();
             $product = Product::find($id);
-             $product->update($request->all());
+            $product->update($request->all());
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -79,7 +79,7 @@ class ProductController extends Controller
             } else {
                 $product->image = "";
             }
-             $product->save();
+            $product->save();
 
 //        $product->name= $request->name;
 //        $product->description= $request->description;
@@ -97,6 +97,7 @@ class ProductController extends Controller
             DB::rollback();
         }
     }
+
     public function delete($id)
     {
         $product = Product::find($id);
