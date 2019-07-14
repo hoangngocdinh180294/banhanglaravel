@@ -14,11 +14,11 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-        if ($product){
+        if ($product) {
             return view('admin.sanpham.index', compact('product'));
         }
-            echo "<div class='alert alert-success'>Không có dữ liệu</div>";
-     }
+        return "<div class='alert alert-success'>Không có dữ liệu</div>";
+    }
 
     public function create()
     {
@@ -28,14 +28,7 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        // $product = new Product();
-//        $product->name = $request->name;
-//        $product->description = $request->description;
-//        $product->unit_price = $request->unit_price;
-//        $product->promotion_price = $request->promotion_price;
-//        $product->unit = $request->unit;
-//        $product->typeproduct_id = $request->typeproduct_id;
-        $product = Product::create($request->all());
+        $data = $request->all();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 
@@ -45,11 +38,11 @@ class ProductController extends Controller
                 $image = str_random(4) . "_" . $name;
             }
             $file->move("page_asset/image/product", $image);
-            $product->image = $image;
+            $data['image'] = $image;
         } else {
-            $product->image = "";
+            $data['image'] = "";
         }
-        $product->save();
+        Product::create($data);
 
         return redirect()->route('product.index')->with('thongbao', 'Sản phẩm đã được Update thành công');
     }
@@ -58,8 +51,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $typeproduct = Typeproduct::all();
-        //$list=$product->typeproduct;
-        //dd($list);
         return view('admin.sanpham.edit', compact('product', 'typeproduct'));
     }
 
@@ -68,7 +59,7 @@ class ProductController extends Controller
         try {
             DB::beginTransaction();
             $product = Product::find($id);
-            $product->update($request->all());
+            $data = $request->all();
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -78,21 +69,11 @@ class ProductController extends Controller
                     $image = str_random(4) . "_" . $name;
                 }
                 $file->move("page_asset/image/product", $image);
-                $product->image = $image;
+                $data['image'] = $image;
             } else {
-                $product->image = "";
+                $data['image'] = "";
             }
-            $product->save();
-
-//        $product->name= $request->name;
-//        $product->description= $request->description;
-//        $product->unit_price= $request->unit_price;
-//        $product->promotion_price= $request->promotion_price;
-//        $product->unit= $request->unit;
-//        $product->typeproduct_id= $request->typeproduct_id;
-//        $product->save();
-
-
+            $product->update($data);
             DB::commit();
             return redirect()->route('product.index')->with('thongbao', 'Sản phẩm đã được Sửa thành công');
         } catch (\Throwable $th) {
