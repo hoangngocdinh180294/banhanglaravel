@@ -14,8 +14,11 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-        return view('admin.sanpham.index', compact('product'));
-    }
+        if ($product){
+            return view('admin.sanpham.index', compact('product'));
+        }
+            echo "<div class='alert alert-success'>Không có dữ liệu</div>";
+     }
 
     public function create()
     {
