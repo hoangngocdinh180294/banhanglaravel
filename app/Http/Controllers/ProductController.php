@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Typeproduct;
 use DB;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
@@ -22,37 +24,24 @@ class ProductController extends Controller
         return view('admin.sanpham.add', compact('typeproduct'));
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'description' => 'required',
-                'unit_price' => 'required',
-                'promotion_price' => 'required',
-                'unit' => 'required',
-                'typeproduct_id' => 'required',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
-            ],
-            [
-                'name.required' => 'Bạn vui lòng nhập tên sản phẩm',
-                'description.required' => 'Bạn vui lòng nhập mô tả',
-                'unit_price.required' => 'Bạn vui lòng nhập giá sản phẩm',
-                'promotion_price.required' => 'Bạn vui lòng nhập giá khuyển mãi sản phẩm',
-                'unit.required' => 'Bạn vui lòng nhập Chủng Loại là 1 hoặc 0',
-                'typeproduct_id.required' => 'Bạn vui lòng chọn loại sản phẩm',
-                'image.required' => 'Bạn vui lòng nhập ảnh',
-                'image.image' => 'Đây không phải là ảnh',
-                'image.mimes' => 'Đuôi ảnh này không hợp lệ',
-            ]);
-
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->unit_price = $request->unit_price;
-        $product->promotion_price = $request->promotion_price;
-        $product->unit = $request->unit;
-        $product->typeproduct_id = $request->typeproduct_id;
+       // $product = new Product();
+//        $product->name = $request->name;
+//        $product->description = $request->description;
+//        $product->unit_price = $request->unit_price;
+//        $product->promotion_price = $request->promotion_price;
+//        $product->unit = $request->unit;
+//        $product->typeproduct_id = $request->typeproduct_id;
+        $product=Product::create([
+            'name'=>$request->name,
+            'description' => $request->description,
+            'unit_price' => $request->unit_price,
+            'promotion_price' => $request->promotion_price,
+            'unit' => $request->unit,
+            'typeproduct_id' => $request->typeproduct_id,
+            'image'=>$request->image,
+        ]);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
 
@@ -80,36 +69,23 @@ class ProductController extends Controller
         return view('admin.sanpham.edit', compact('product', 'typeproduct'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'description' => 'required',
-                'unit_price' => 'required',
-                'promotion_price' => 'required',
-                'unit' => 'required',
-                'typeproduct_id' => 'required',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
-            ],
-            [
-                'name.required' => 'Bạn vui lòng nhập tên sản phẩm',
-                'description.required' => 'Bạn vui lòng nhập mô tả',
-                'unit_price.required' => 'Bạn vui lòng nhập giá sản phẩm',
-                'promotion_price.required' => 'Bạn vui lòng nhập giá khuyển mãi sản phẩm',
-                'unit.required' => 'Bạn vui lòng nhập Chủng Loại là 1 hoặc 0',
-                'typeproduct_id.required' => 'Bạn vui lòng chọn loại sản phẩm',
-                'image.required' => 'Bạn vui lòng nhập ảnh',
-                'image.image' => 'Đây không phải là ảnh',
-                'image.mimes' => 'Đuôi ảnh này không hợp lệ',
-            ]);
-        try {
+         try {
             DB::beginTransaction();
             $product = Product::find($id);
+             $product->update([
+                 'name'=>$request->name,
+                 'description' => $request->description,
+                 'unit_price' => $request->unit_price,
+                 'promotion_price' => $request->promotion_price,
+                 'unit' => $request->unit,
+                 'typeproduct_id' => $request->typeproduct_id,
+                 'image'=>$request->image,
+             ]);
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
-
                 $name = $file->getClientOriginalName();
                 $image = str_random(4) . "_" . $name;
                 while (file_exists("page_asset/image/product/" . $image)) {
@@ -120,14 +96,16 @@ class ProductController extends Controller
             } else {
                 $product->image = "";
             }
+             $product->save();
 
-        $product->name= $request->name;
-        $product->description= $request->description;
-        $product->unit_price= $request->unit_price;
-        $product->promotion_price= $request->promotion_price;
-        $product->unit= $request->unit;
-        $product->typeproduct_id= $request->typeproduct_id;
-        $product->save();
+//        $product->name= $request->name;
+//        $product->description= $request->description;
+//        $product->unit_price= $request->unit_price;
+//        $product->promotion_price= $request->promotion_price;
+//        $product->unit= $request->unit;
+//        $product->typeproduct_id= $request->typeproduct_id;
+//        $product->save();
+
 
             DB::commit();
             return redirect()->route('product.index')->with('thongbao', 'Sản phẩm đã được Sửa thành công');
