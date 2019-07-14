@@ -32,8 +32,7 @@ class SlideController extends Controller
             'image.mimes'=>'Đuôi ảnh này không hợp lệ',
         ]);
 
-        $slider= new Slide();
-        $slider->link= $request->link;
+        $data=$request->all();
         if($request->hasFile('image'))
         {
             $file = $request->file('image');
@@ -45,12 +44,12 @@ class SlideController extends Controller
                 $image = str_random(4)."_".$name; 
             }
             $file->move("page_asset/image/slide",$image);
-            $slider->image =$image;
+            $data['image'] =$image;
         }else
         {
-            $slider->image="";
+            $data['image']="";
         }     
-        $slider->save();      
+        Slide::create($data);
         return redirect()->route('slide.index')->with('thongbao','Slide của bạn đã được Thêm thành công');
     }
     public function edit($id)
@@ -73,6 +72,7 @@ class SlideController extends Controller
         ]);
         
         $slide= Slide::find($id);
+        $data=$request->all();
         if($request->hasFile('image'))
         {
             $file = $request->file('image');
@@ -85,12 +85,12 @@ class SlideController extends Controller
             }
             //unlink("image/slide/".$slide->image);
             $file->move("page_asset/image/slide",$image);
-            $slide->image =$image;
+            $data['image'] =$image;
         }else
         {
-            $slide->image="";
+            $data['image']="";
         }   
-        $slide->save(); 
+        $slide->update($data);
         return redirect()->route('slide.index')->with('thongbao','Slide của bạn đã được Sửa thành công');
     }
     public function delete($id)
