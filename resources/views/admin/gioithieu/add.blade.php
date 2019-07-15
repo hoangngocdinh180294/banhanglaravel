@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea name="noidung" class="form-control" ></textarea>
+                                <textarea name="title" class="form-control" ></textarea>
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label>

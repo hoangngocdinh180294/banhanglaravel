@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use DB;
+use App\Http\Requests\BillRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
@@ -19,23 +20,12 @@ class BillController extends Controller
         $bills = Bill::find($id);
         return view('admin.hoadon.edit', compact('bills'));
     }
-    public function update(Request $request, $id)
+    public function update(BillRequest $request, $id)
     {
-        $this->validate(
-            $request,
-            [
-                'options' => 'required',
-            ],
-            [
-                    'options.required' => 'Bạn vui lòng nhập trạng thái của đơn hàng'
-            ]
-        );
-        Bill::find($id)->update([
-            'date_order' => $request->date_order,
-            'total' =>$request->total,
-            'note' => $request->note,
-            'options' => $request->options,
-        ]);
+        $bill=Bill::find($id);
+        $data=$request->all();
+        $bill->update($data);
+
         return redirect()->route('bill.index')->with('thongbao', 'Bạn đã thay đổi thành công trạng thái của hóa đơn');
     }
     public function delete($id)

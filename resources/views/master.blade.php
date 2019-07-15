@@ -17,54 +17,54 @@
 	<link rel="stylesheet" title="style" href="page_asset/assets/dest/css/huong-style.css">
 </head>
 <body>
-	<!-- header-->
-		@include('header')
-	<!-- header-->	
-	<!-- Slide and container-->
-		<div class="rev-slider">
-			@yield('content')
-		</div> <!-- .container -->	
-	<!-- Slide and container-->
+<!-- header-->
+@include('header')
+<!-- header-->
+<!-- Slide and container-->
+<div class="rev-slider">
+	@yield('content')
+</div> <!-- .container -->
+<!-- Slide and container-->
 
-	<!-- footer-->
-		@include('footer')
-	<!-- footer-->	
-	<div class="copyright">
-		<div class="container">
-			<p class="pull-left">Hoàng Định. (&copy;) 2019</p>
-			
-			<div class="clearfix"></div>
-		</div> <!-- .container -->
-	</div> <!-- .copyright -->
+<!-- footer-->
+@include('footer')
+<!-- footer-->
+<div class="copyright">
+	<div class="container">
+		<p class="pull-left">Hoàng Định. (&copy;) 2019</p>
+
+		<div class="clearfix"></div>
+	</div> <!-- .container -->
+</div> <!-- .copyright -->
 
 
-	<!-- include js files -->
-	<script src="page_asset/assets/dest/js/jquery.js"></script>
-	<script src="page_asset/assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-	<script src="page_asset/assets/dest/vendors/bxslider/jquery.bxslider.min.js"></script>
-	<script src="page_asset/assets/dest/vendors/colorbox/jquery.colorbox-min.js"></script>
-	<script src="page_asset/assets/dest/vendors/animo/Animo.js"></script>
-	<script src="page_asset/assets/dest/vendors/dug/dug.js"></script>
-	<script src="page_asset/assets/dest/js/scripts.min.js"></script>
-	<script src="page_asset/assets/dest/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-	<script src="page_asset/assets/dest/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-	<script src="page_asset/assets/dest/js/waypoints.min.js"></script>
-	<script src="page_asset/assets/dest/js/wow.min.js"></script>
-	<!--customjs-->
-	<script src="page_asset/assets/dest/js/custom2.js"></script>
-	<script>
-	$(document).ready(function($) {    
+<!-- include js files -->
+<script src="page_asset/assets/dest/js/jquery.js"></script>
+<script src="page_asset/assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="page_asset/assets/dest/vendors/bxslider/jquery.bxslider.min.js"></script>
+<script src="page_asset/assets/dest/vendors/colorbox/jquery.colorbox-min.js"></script>
+<script src="page_asset/assets/dest/vendors/animo/Animo.js"></script>
+<script src="page_asset/assets/dest/vendors/dug/dug.js"></script>
+<script src="page_asset/assets/dest/js/scripts.min.js"></script>
+<script src="page_asset/assets/dest/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+<script src="page_asset/assets/dest/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script src="page_asset/assets/dest/js/waypoints.min.js"></script>
+<script src="page_asset/assets/dest/js/wow.min.js"></script>
+<!--customjs-->
+<script src="page_asset/assets/dest/js/custom2.js"></script>
+<script>
+	$(document).ready(function($) {
 		$(window).scroll(function(){
 			if($(this).scrollTop()>150){
-			$(".header-bottom").addClass('fixNav')
+				$(".header-bottom").addClass('fixNav')
 			}else{
 				$(".header-bottom").removeClass('fixNav')
 			}}
 		)
 	})
-	</script>
-	
-	
+</script>
+
+
 </body>
 </html>

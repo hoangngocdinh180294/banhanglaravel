@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea name="noidung" class="form-control" value={!! $gioithieu->title !!} ></textarea>
+                                <textarea name="title" class="form-control" value="{!! $gioithieu->title !!}" ></textarea>
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label>
