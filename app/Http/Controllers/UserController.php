@@ -26,11 +26,9 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             //lưu vào user
-            $usercreate = User::create([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'password'=>bcrypt($request->password),
-            ]);
+            $data=$request->all();
+            $data['password']=bcrypt($request->password);
+            $usercreate = User::create($data);
             //lưu vào bảng role_user
             $usercreate->roles()->attach($request->roles);
             DB::commit();
@@ -53,10 +51,8 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             //lưu vào update
-            User::where('id',$id)->update([
-                'name'=>$request->name,
-                'email'=>$request->email,
-            ]);
+            $user=User::find($id);
+            $user->update($request->all());
             //lưu vào bảng role_user
             DB::table('role_user')->where('user_id',$id)->delete();//xóa hết dữ liêu của role_user theo user đó
             $userupdate =User::find($id);//lấy id của user để dùng cho phương thức trung gian
