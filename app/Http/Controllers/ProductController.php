@@ -85,6 +85,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
+        // sua ngay 18/7
         $product = Product::find($id);
         $product->delete();
         $product->bill_details()->delete();
