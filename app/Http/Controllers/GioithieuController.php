@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gioithieu;
+use App\Http\Requests\GioithieuRequest;
 
 
 use Illuminate\Http\Request;
@@ -21,22 +22,8 @@ class GioithieuController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(GioithieuRequest $request)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'title' => 'required',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
-            ],
-            [
-                'name.required' => 'Bạn vui lòng nhập tên',
-                'title.required' => 'Bạn vui lòng nhập nội dung',
-                'image.required' => 'Bạn vui lòng nhập ảnh',
-                'image.image' => 'Đây không phải là ảnh',
-                'image.mimes' => 'Đuôi ảnh này không hợp lệ',
-            ]);
-
         $data=$request->all();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -61,22 +48,8 @@ class GioithieuController extends Controller
         return view('admin.gioithieu.edit', compact('gioithieu'));
     }
 
-    public function update(Request $request, $id)
+    public function update(GioithieuRequest $request, $id)
     {
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'title' => 'required',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
-            ],
-            [
-                'name.required' => 'Bạn vui lòng nhập tên',
-                'title.required' => 'Bạn vui lòng nhập nội dung',
-                'image.required' => 'Bạn vui lòng nhập ảnh',
-                'image.image' => 'Đây không phải là ảnh',
-                'image.mimes' => 'Đuôi ảnh này không hợp lệ',
-            ]);
-
         $gioithieu = Gioithieu::find($id);
         $data=$request->all();
         if ($request->hasFile('image')) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use App\Http\Requests\UserRequest;
 use DB;
 use Illuminate\Support\Facades\Log;
 
@@ -20,26 +21,8 @@ class UserController extends Controller
         $roles = Role::all();
         return view('admin.user.add',compact('roles'));
     }
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $this->validate($request,
-        [
-            'name'=>'required',
-            'email'=>'required|unique:users,email|email',
-            'password'=>'required|min:6',
-            'password1'=>'required|same:password',
-        ],
-        [
-            'name.required'=>'Bạn vui lòng nhập tên',
-            'email.required'=>'Bạn vui lòng nhập Email',
-            'email.unique'=>'Email này đã tồn tại',
-            'email.email'=>'Đây không phải là Email',
-            'password.required'=>'Bạn vui lòng nhập Mật khẩu',
-            'password.min'=>'Mật khẩu có ít nhất 6 ký tư',
-            'password1.required'=>'Bạn vui lòng nhập lại Mật khẩu',
-            'password1.same'=>'Mật khẩu của bạn không giống nhau',
-
-        ]);
         try {
             DB::beginTransaction();
             //lưu vào user

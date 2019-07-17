@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Lienhe;
+use App\Http\Requests\LienheRequest;
 use Carbon\Carbon;
 use Mail;
 
@@ -13,23 +14,8 @@ class LienheController extends Controller
     {
         return view('page.lienhe');
     }
-    public function postlienhe(Request $request)
+    public function postlienhe(LienheRequest $request)
     {
-        $this->validate($request,
-        [
-            'name'=>'required',
-            'email'=>'required|email',
-            'title'=>'required',
-            'noidung'=>'required',
-        ],
-        [   
-            'name.required'     =>'Bạn chưa nhập họ tên',
-            'email.required'    =>'Bạn chưa nhập Email',
-            'email.email'       =>'Vui lòng nhập đúng cú pháp Email',
-            'title.required'    =>'Bạn chưa nhập tiêu đề',
-            'noidung.required'  =>'Bạn chưa nhập nội dung',
-        ]);
-        
         $email=[
             'ten'=>$request->name,
             'email'=>$request->email,

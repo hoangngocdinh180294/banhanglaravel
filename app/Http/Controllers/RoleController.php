@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Permission;
 use App\Role;
+use App\Http\Requests\RoleRequest;
 use DB;
 use Illuminate\Support\Facades\Log;
 
@@ -21,23 +22,11 @@ class RoleController extends Controller
         $permission = Permission::all();
         return view('admin.role.add',compact('permission'));
     }
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $this->validate($request,
-        [
-            'name'=>'required',
-            'display_name'=>'required',
-        ],
-        [
-            'name.required'=>'Bạn vui lòng nhập tên',
-            'display_name.required'=>'Bạn vui lòng nhập tên đầy đủ',
-        ]);
         try {
             DB::beginTransaction();
-            $createrole = Role::create([
-                'name' => $request->name,
-                'display_name' => $request->display_name,
-            ]);
+            $createrole = Role::create($request->all());
             $createrole->permissions()->attach($request->permission);
             DB::commit();
             return redirect()->route('role.index')->with('thongbao','Bạn đã thêm nhóm quyền thành công');
@@ -53,15 +42,12 @@ class RoleController extends Controller
         $listPermissionOfRole=DB::table('permission_role')->where('role_id',$id)->pluck('permission_id');
         return view('admin.role.edit',compact('roles','permission','listPermissionOfRole'));
     }
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
         try {
             DB::beginTransaction();
             //lưu vào bảng role
-            Role::where('id',$id)->update([
-                'name'=>$request->name,
-                'display_name'=>$request->display_name,
-            ]);
+            Role::where('id',$id)->update($request->all());
             //lưu vào bảng permissions
             //1.xóa hết dữ liêu bảng permission_role theo id
             DB::table('permission_role')->where('role_id',$id)->delete();
