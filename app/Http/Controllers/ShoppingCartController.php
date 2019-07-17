@@ -107,19 +107,30 @@ class ShoppingCartController extends Controller
             //$billDetail->save();
             //}
             //}
+ 
+            /**
+             * ----------------------------------------------------------------------/
+             */
+            // $customer = Customer::create([
+            //     'name' => $request->name,
+            //     'email' => $request->email,
+            //     'address' => $request->address,
+            //     'phone_number' => $request->phone_number,
+            //     'note' => $request->note,
+            // ]);
+            $data = $request->only('name', 'email', 'address', 'phone_number', 'note');
+            $customer=Customer::create($data);
+            
+            // $bill = $customer->bills()->create([
+            //     'date_order' => date('Y-m-d H:i:s'),
+            //     'total' => str_replace(',', '', Cart::subtotal()),
+            //     'note' => $request->note,
+            // ]);
+            $data1 = $request->only('note');
+            $data1['date_order'] = date('Y-m-d H:i:s');
+            $data1['total'] = str_replace(',', '', Cart::subtotal());
+            $bill = $customer->bills()->create($data1);
 
-            $customer = Customer::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'address' => $request->address,
-                'phone_number' => $request->phone_number,
-                'note' => $request->note,
-            ]);
-            $bill = $customer->bills()->create([
-                'date_order' => date('Y-m-d H:i:s'),
-                'total' => str_replace(',', '', Cart::subtotal()),
-                'note' => $request->note,
-            ]);
             if (count($cart) > 0) {
                 foreach ($cart as $item) {
                     $billDetail = new Bill_detail;
@@ -128,6 +139,7 @@ class ShoppingCartController extends Controller
                     $billDetail->quantily = $item->qty;
                     $billDetail->price = $item->price;
                     $billDetail->save();
+
                     //$bill->bill_details()->create([
                     //'product_id'=>$item->id,
                     //'quantily'=>$item->qty,
