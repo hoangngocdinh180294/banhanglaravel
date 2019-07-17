@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Bill_detail;
+use App\Http\Requests\ShoppingRequest;
 use Cart;
 use Mail;
 use DB;
@@ -58,29 +59,12 @@ class ShoppingCartController extends Controller
         return view('page.thanhtoan', compact('products'));
     }
 
-    public function sendemail(Request $request)
+    public function sendemail(ShoppingRequest $request)
     {
         $cart = Cart::content();
-        $this->validate($request,
-            [
-                'name' => 'required',
-                'email' => 'required|email',
-                'address' => 'required',
-                'phone_number' => 'required|digits_between:10,12'
-            ],
-            [
-                'name.required' => 'Bạn vui lòng nhập họ tên',
-                'email.required' => 'Bạn vui lòng nhập email',
-                'email.email' => 'Bạn vui lòng nhập đúng email hợp lệ',
-                'address.required' => 'Bạn vui lòng nhập địa chỉ',
-                'phone_number.required' => 'Bạn vui lòng nhập số điện thoại',
-                'phone_number.digits_between' => 'Bạn vui lòng nhập đúng cú pháp số điện thoại....'
-            ]);
-
-
         try {
             DB::beginTransaction();
-            //TODO:Cach 2
+            //TODO:Cach 1
             // save
             //$customer = new Customer;
             //$customer->name = $request->name;
@@ -108,9 +92,8 @@ class ShoppingCartController extends Controller
             //}
             //}
  
-            /**
-             * ----------------------------------------------------------------------/
-             */
+            //TODO:Cach 2
+
             // $customer = Customer::create([
             //     'name' => $request->name,
             //     'email' => $request->email,
