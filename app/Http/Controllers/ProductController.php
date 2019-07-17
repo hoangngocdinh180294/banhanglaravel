@@ -9,6 +9,7 @@ use DB;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Log;
 
+
 class ProductController extends Controller
 {
     public function index()
