@@ -87,6 +87,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
+        $product->bill_details()->delete();
         return redirect()->route('product.index')->with('thongbao', 'Sản phẩm đã được Xóa thành công');
     }
 }
