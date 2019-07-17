@@ -86,9 +86,21 @@ class ProductController extends Controller
     public function delete($id)
     {
         // sua ngay 18/7
-        $product = Product::find($id);
-        $product->delete();
-        $product->bill_details()->delete();
-        return redirect()->route('product.index')->with('thongbao', 'Sản phẩm đã được Xóa thành công');
+        try {
+            DB::beginTransaction();
+            $product = Product::find($id);
+            $product->delete();
+            $product->bill_details()->delete();
+
+            DB::commit();
+            return redirect()->route('product.index')->with('thongbao', 'Sản phẩm đã được Xóa thành công');
+            
+        } catch (\Throwable $th) {
+            Log::error('Loi:' . $th->getMessage() . $th->getLine());
+            DB::rollback();
+
+        }
+        
+        
     }
 }
