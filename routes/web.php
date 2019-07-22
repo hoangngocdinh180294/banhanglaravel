@@ -315,6 +315,3 @@ Route::group(['prefix' => 'trangchu'], function () {
         Route::post('/sendemail', 'ShoppingCartController@sendemail')->name('senemail.thanhtoan.cart');
     });
 });
-Route::get('users/{id}', function ($id) {
-    
-});
